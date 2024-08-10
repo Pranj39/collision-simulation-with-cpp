@@ -1,23 +1,24 @@
 #include "body.h"
 #include <iostream>
+#include "raymath.h"
 std::vector<Vector2> Body::getAxis(){
     Vector2 OX = {1,0};
     Vector2 OY = {0,1};
 
-    Vector2 RX = OX.Rotate(angle*3.14/180);
-    Vector2 RY = OY.Rotate(angle*3.14/180);
-    std::vector<Vector2> axes = {RX.Normalize(),RY.Normalize()};
+    Vector2 RX = Vector2Rotate(OX,angle*3.14/180);
+    Vector2 RY = Vector2Rotate(OY,angle*3.14/180);
+    std::vector<Vector2> axes = {Vector2Normalize(RX),Vector2Normalize(RY)};
     return axes;
 }
 std::vector<Vector2> Body::getCorners(){
     std::vector<Vector2> axes = getAxis();
-    Vector2 X = axes[0]*(sizex/2);
-    Vector2 Y = axes[1]*(sizey/2);
+    Vector2 X = Vector2Scale(axes[0],(sizex/2));
+    Vector2 Y = Vector2Scale(axes[1],(sizey/2));
     std::vector<Vector2> cor = {
-        this->getPos()+X+Y,
-        this->getPos()+X-Y,
-        this->getPos()-X-Y,
-        this->getPos()-X+Y,
+        Vector2Add(this->getPos(),Vector2Add(X,Y)),
+        Vector2Add(this->getPos(),Vector2Subtract(X,Y)),
+        Vector2Subtract(this->getPos(),Vector2Add(X,Y)),
+        Vector2Subtract(this->getPos(),Vector2Subtract(X,Y)),
 
     };
     DrawLine(this->getPos().x,this->getPos().y, cor[3].x,cor[3].y, BLACK);
@@ -47,7 +48,7 @@ std::vector<bool> Body::project(Body* b){
                     // DrawLine(b->getPos().x+25,b->getPos().y, b->getPos().x+proj.x+25, b->getPos().y+proj.y, BLUE);
                     Vector2 cp = {proj.x - b->getPos().x, proj.y - b->getPos().y};
                     sign = (cp.x*b->getAxis()[i].x)+(cp.y * b->getAxis()[i].y)>0;
-                    float signedMag = cp.Magnitude() * ((sign)?1:-1);
+                    float signedMag = Vector2Length(cp) * ((sign)?1:-1);
                     // DrawLine(b->getPos().x,b->getPos().y, b->getPos().x+cp.x, b->getPos().y+cp.y, YELLOW);
                     // DrawLine(b->getPos().x,b->getPos().y, proj.x, proj.y, (j==0)?BROWN:(j==1)?RED:(j==2)?GREEN:BLUE);
                 // DrawLine(b->getPos().x,b->getPos().y, b->getPos().x+cp.x, b->getPos().y+cp.y, BROWN);

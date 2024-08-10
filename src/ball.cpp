@@ -72,13 +72,13 @@ void Ball::Collide(Vector2 normal){
 }
 std::vector<Vector2> Ball::getCorners(){
     std::vector<Vector2> axes = getAxis();
-    Vector2 X = axes[0]*(sizex/2);
-    Vector2 Y = axes[1]*(sizey/2);
+    Vector2 X = Vector2Scale(axes[0],(sizex/2));
+    Vector2 Y = Vector2Scale(axes[1],(sizey/2));
     std::vector<Vector2> cor = {
-        this->getPos()+X+Y,
-        this->getPos()+X-Y,
-        this->getPos()-X-Y,
-        this->getPos()-X+Y,
+        Vector2Add(this->getPos(),Vector2Add(X,Y)),
+        Vector2Add(this->getPos(),Vector2Subtract(X,Y)),
+        Vector2Subtract(this->getPos(),Vector2Add(X,Y)),
+        Vector2Subtract(this->getPos(),Vector2Subtract(X,Y)),
 
     };
     DrawLine(this->getPos().x,this->getPos().y, cor[3].x,cor[3].y, RED);

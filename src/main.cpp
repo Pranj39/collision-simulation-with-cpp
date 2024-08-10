@@ -42,8 +42,8 @@ int main()
         body.Draw();
         body2.Draw();
         body3.Draw();
-        Vector2 del = ball.getPos().Add(GetMousePosition().Multiply(-1));
-        del = del.Normalize();
+        Vector2 del = Vector2Subtract(ball.getPos(),GetMousePosition());
+        del = Vector2Normalize(del);
         if(IsMouseButtonDown(0)){
             ball.setSpeed({0,0});
             DrawLine(GetMousePosition().x, GetMousePosition().y, GetMousePosition().x + del.x*350, GetMousePosition().y+del.y*350, MAGENTA);
