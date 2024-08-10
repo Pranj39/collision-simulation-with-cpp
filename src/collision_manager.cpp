@@ -65,7 +65,7 @@ bool CollisionManager::checkCol(Body *b1, bool prevCol){
                     b1->Collide(normal);
                     prevCol = true;
                 }else{
-                    b1->setPos(Vector2Add(b1->getPos(),(Vector2Scale(normal,10))));
+                    b1->setPos(Vector2Add(b1->getPos(),(Vector2Scale(normal,2))));
                     b1->setSpeed(Vector2Scale(normal,Vector2Length(b1->getSpeed())));
                     prevCol = true;
                 }

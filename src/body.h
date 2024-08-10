@@ -17,7 +17,10 @@ class Body{
 
     }
     Body(int x, int y, int sizex, int sizey, float angle, Vector2 speed):
-    x(x), y(y), sizex(sizex), sizey(sizey), angle(angle), speed(speed){};
+    x(x), y(y), sizex(sizex), sizey(sizey), angle(angle){
+        this->speed.x = speed.x;
+        this->speed.y = speed.y;
+    };
 
     Body(Body& b){
         this->x = b.x;
@@ -27,6 +30,18 @@ class Body{
         this->angle = angle;
         this->sizex = sizex;
         this->sizey = sizey;
+    }
+    Body(Body&& b){
+        this->x = b.x;
+        this->y = b.y;
+        this->angle = b.angle;
+        this->speed = speed;
+        this->angle = angle;
+        this->sizex = sizex;
+        this->sizey = sizey;
+    }
+    ~Body(){
+
     }
     virtual void Update(){
     }

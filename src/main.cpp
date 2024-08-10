@@ -2,25 +2,21 @@
 #include <raymath.h>
 #include "ball.h"
 #include "body.h"
+#include "level_manager.h"
 #include "collision_manager.h" 
 #include <iostream>
 int main()
 {
     Color darkGreen = Color{20, 160, 133, 255};
 
-    const int screenWidth = 800;
-    const int screenHeight = 600;
+    const int screenWidth = 1366;
+    const int screenHeight = 768;
 
     Ball ball;
-    Body body;
-    Body body2(100,100,40,40,25,{0,0});
-    Body body3(50,100,40,100,135,{0,0});
-
     CollisionManager cm;
+    LevelManager lm(&cm);
     cm.add(&ball);
-    cm.add(&body);
-    cm.add(&body2);
-    cm.add(&body3);
+    lm.loadLevel();
     InitWindow(screenWidth, screenHeight, "My first RAYLIB program!");
     SetTargetFPS(120);
     
@@ -39,9 +35,7 @@ int main()
         ball.Update(time, deltaTime);
         prevCol=cm.checkCol(&ball, prevCol);
         ball.Draw();
-        body.Draw();
-        body2.Draw();
-        body3.Draw();
+        lm.drawLevel();
         Vector2 del = Vector2Subtract(ball.getPos(),GetMousePosition());
         del = Vector2Normalize(del);
         if(IsMouseButtonDown(0)){
