@@ -7,5 +7,8 @@ class CollisionManager{
     public:
     bool checkCol(Body*, bool);
     void add(Body*);
+    void clear(){
+        bodies.clear();
+    }
 
 };

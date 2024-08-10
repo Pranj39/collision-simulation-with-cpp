@@ -12,6 +12,16 @@ class Level{
     Level(Body *b){
         bodies.emplace_back(b);
     }
+    Level(){}
+
+    Level(Level& l){
+        bodies = l.bodies;
+    }
+    
+    Level(Level&& l){
+        bodies = l.bodies;
+    }
+    ~Level(){}
 
     Level(std::vector<Body*> bodies){
         for(int i =0;i<bodies.size();i++){

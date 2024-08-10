@@ -70,9 +70,9 @@ bool CollisionManager::checkCol(Body *b1, bool prevCol){
                     prevCol = true;
                 }
                 return prevCol;
-                }
-        }else{
+                }else{
             b1->col = BLACK;
+        }
         }
     }
     return false;

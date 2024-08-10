@@ -11,12 +11,13 @@ int main()
 
     const int screenWidth = 1366;
     const int screenHeight = 768;
+    int levelIndex=0;
 
     Ball ball;
     CollisionManager cm;
     LevelManager lm(&cm);
     cm.add(&ball);
-    lm.loadLevel();
+    lm.loadLevel(levelIndex);
     InitWindow(screenWidth, screenHeight, "My first RAYLIB program!");
     SetTargetFPS(120);
     
@@ -30,12 +31,18 @@ int main()
         deltaTime = GetFrameTime();
         
         i++;
+
+        if(IsKeyPressed(KEY_SPACE)){
+            lm.levelIndex++;
+            lm.endLevel();
+            lm.loadLevel(lm.levelIndex);
+        }
         BeginDrawing();
         ClearBackground(darkGreen);
         ball.Update(time, deltaTime);
         prevCol=cm.checkCol(&ball, prevCol);
         ball.Draw();
-        lm.drawLevel();
+        lm.drawLevel(lm.levelIndex);
         Vector2 del = Vector2Subtract(ball.getPos(),GetMousePosition());
         del = Vector2Normalize(del);
         if(IsMouseButtonDown(0)){
