@@ -21,6 +21,11 @@ class Body{
         this->speed.x = speed.x;
         this->speed.y = speed.y;
     };
+    Body(int x, int y, int sizex, int sizey, float angle, Vector2 speed, bool win):
+    x(x), y(y), sizex(sizex), sizey(sizey), angle(angle), win(win){
+        this->speed.x = speed.x;
+        this->speed.y = speed.y;
+    };
 
     Body(Body& b){
         this->x = b.x;
@@ -82,6 +87,7 @@ class Body{
     Color col;
     float angle;
     
+    bool win=false;
     protected:
     int x;
     Vector2 speed;

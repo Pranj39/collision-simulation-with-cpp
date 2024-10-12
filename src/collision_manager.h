@@ -5,7 +5,7 @@
 class CollisionManager{
     std::vector<Body*> bodies;
     public:
-    bool checkCol(Body*, bool);
+    bool checkCol(Body*, bool, int &levelIndex);
     void add(Body*);
     void clear(){
         bodies.clear();

@@ -40,8 +40,10 @@ int main()
         BeginDrawing();
         ClearBackground(darkGreen);
         ball.Update(time, deltaTime);
-        prevCol=cm.checkCol(&ball, prevCol);
+        prevCol=cm.checkCol(&ball, prevCol, lm.levelIndex);
         ball.Draw();
+        lm.endLevel();
+        lm.loadLevel(lm.levelIndex);
         lm.drawLevel(lm.levelIndex);
         Vector2 del = Vector2Subtract(ball.getPos(),GetMousePosition());
         del = Vector2Normalize(del);

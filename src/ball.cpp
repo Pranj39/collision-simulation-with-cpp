@@ -1,3 +1,4 @@
+#pragma once
 #include "ball.h"
 #include <raylib.h>
 #include <cmath>

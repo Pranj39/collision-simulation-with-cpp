@@ -2,12 +2,14 @@
 #include <iostream>
 #include <cmath>
 #include <raymath.h>
-bool CollisionManager::checkCol(Body *b1, bool prevCol){
+bool CollisionManager::checkCol(Body *b1, bool prevCol, int &levelIndex){
     for(auto b : bodies){
         if(b1!=b){
             std::vector<bool> a = b1->project(b);
             std::vector<bool> m = b->project(b1);
             if(a.at(0)&&a.at(1)&&m.at(0)&&m.at(1)){
+                if(!b->win)
+                {
                 b1->col= RED;
                 DrawText("COOIDING",0,0,100,BLACK);
                 Vector2 faces[4] ={
@@ -70,7 +72,14 @@ bool CollisionManager::checkCol(Body *b1, bool prevCol){
                     prevCol = true;
                 }
                 return prevCol;
-                }else{
+                }else if(b->win){
+                    DrawText("WON",0,0,100,BLACK);
+                    std::cout<<"OK";
+                    levelIndex += 1;
+                    return true;
+                }
+                }
+                else{
             b1->col = BLACK;
         }
         }

@@ -1,3 +1,4 @@
+#pragma once
 #include <raylib.h>
 #include <raymath.h>
 #include <vector>
@@ -30,7 +31,8 @@ class LevelManager{
         b.emplace_back();
         b.emplace_back(200,100,int(10),int(120),45.f,Vector2Zero());
         b.emplace_back(100,100,120,40,20.f,Vector2Zero());
-        b.emplace_back(100,600,300,90,21.f,Vector2Zero());
+        b.emplace_back(100,600,300,90,21.f,Vector2Zero(),true);
+        
 
         b2.reserve(100);
         b2.emplace_back();
@@ -43,6 +45,7 @@ class LevelManager{
         this->cm = cm;
     }
     void loadLevel(int index){
+            endLevel();
             for(int j = 0; j<levels[index].getBodies().size();j++){
                 cm->add(levels[index].getBodies()[j]);
             }
