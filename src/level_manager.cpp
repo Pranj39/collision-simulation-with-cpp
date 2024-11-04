@@ -18,7 +18,7 @@ int LevelManager::levelIndex = -1;
         b.emplace_back();
         b.emplace_back(200,100,int(10),int(120),45.f,Vector2Zero());
         b.emplace_back(100,100,120,40,20.f,Vector2Zero());
-        b.emplace_back(100,600,300,90,21.f,Vector2Zero(),true);
+        b.emplace_back(100,350,300,90,21.f,Vector2Zero(),true);
         
 
         b2.reserve(100);

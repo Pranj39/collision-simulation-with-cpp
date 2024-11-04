@@ -9,11 +9,14 @@
 #include <iostream>
 int main()
 {
+    SetConfigFlags(FLAG_WINDOW_RESIZABLE);
     std::string s;
     Color darkGreen = Color{20, 160, 133, 255};
 
-    const int screenWidth = 1366;
-    const int screenHeight = 768;
+    const int screenWidth = GetMonitorWidth(0);
+    const int screenHeight = GetMonitorHeight(0);
+    InitWindow(1920, 1080, "My first RAYLIB program!");
+    
     int levelIndex=0;
     int clickCount = 0;
     bool isClicked = false;
@@ -23,7 +26,6 @@ int main()
     LevelManager lm(&cm);
     cm.add(&ball);
     lm.loadLevel();
-    InitWindow(screenWidth, screenHeight, "My first RAYLIB program!");
     SetTargetFPS(120);
     
     float time = GetTime();
@@ -42,6 +44,12 @@ int main()
         i++;
 
         if(IsKeyPressed(KEY_SPACE)){
+            
+            lm.levelIndex++;
+            lm.endLevel();
+            lm.loadLevel();
+        }
+        if(IsMouseButtonDown(0)&&lm.levelIndex==-1){
             lm.levelIndex++;
             lm.endLevel();
             lm.loadLevel();
