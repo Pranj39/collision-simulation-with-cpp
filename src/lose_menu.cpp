@@ -20,7 +20,8 @@
 // };
 
 void LoseMenu::Draw(){
-    DrawText("YOU LOST! PRESS Q TO QUIT OR R TO RESTART", GetScreenHeight()/4, GetScreenWidth()/4, 50, BLACK);
+    int textSize = MeasureText("YOU LOST! PRESS Q TO QUIT OR R TO RESTART", 50);  
+    DrawText("YOU LOST! PRESS Q TO QUIT OR R TO RESTART", (GetScreenWidth()-textSize)/2, GetScreenHeight()/2, 50, BLACK);
 }
 
 void LoseMenu::Update(){

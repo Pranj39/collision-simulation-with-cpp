@@ -7,6 +7,7 @@ class MainMenu{
         
     }
     void Draw(){
-        DrawText("PRESS SPACE TO ENTER", GetScreenHeight()/2, GetScreenWidth()/4,50, RED);   
+        int textSize = MeasureText("PRESS SPACE TO ENTER", 50);
+        DrawText("PRESS SPACE TO ENTER", (GetScreenWidth()-textSize)/2, GetScreenHeight()/2,50, RED);   
     }
 };
