@@ -13,12 +13,14 @@ int main()
     const int screenWidth = 1366;
     const int screenHeight = 768;
     int levelIndex=0;
+    int clickCount = 0;
+    bool isClicked = false;
 
     Ball ball;
     CollisionManager cm;
     LevelManager lm(&cm);
     cm.add(&ball);
-    lm.loadLevel(levelIndex);
+    lm.loadLevel();
     InitWindow(screenWidth, screenHeight, "My first RAYLIB program!");
     SetTargetFPS(120);
     
@@ -37,7 +39,7 @@ int main()
         if(IsKeyPressed(KEY_SPACE)){
             lm.levelIndex++;
             lm.endLevel();
-            lm.loadLevel(lm.levelIndex);
+            lm.loadLevel();
         }
         BeginDrawing();
         ClearBackground(darkGreen);
@@ -45,25 +47,36 @@ int main()
         prevCol=cm.checkCol(&ball, prevCol, lm.levelIndex);
         
         if(lm.levelIndex<0){
-            m->Draw();
+            
         }else{
         ball.Draw();
 
         }
         lm.endLevel();
-        lm.loadLevel(lm.levelIndex);
-        lm.drawLevel(lm.levelIndex);
+        lm.loadLevel();
+        lm.drawLevel();
         Vector2 del = Vector2Subtract(ball.getPos(),GetMousePosition());
         del = Vector2Normalize(del);
         if(IsMouseButtonDown(0)){
             ball.setSpeed({0,0});
             DrawLine(GetMousePosition().x, GetMousePosition().y, GetMousePosition().x + del.x*350, GetMousePosition().y+del.y*350, MAGENTA);
         }
+        if(IsMouseButtonDown(0) && !isClicked){
+            clickCount++;
+            std::cout<<clickCount;
+            isClicked = true;
+        }
         if(IsMouseButtonReleased(0)){
+            isClicked = false;
             ball.setSpeed({del.x*1000,del.y*1000});
     
         }
-
+        if(clickCount >=10){
+            lm.endLevel();
+            lm.levelIndex = -2;
+            clickCount = 0;
+            lm.drawLevel();
+        }
         EndDrawing();
     }
 
