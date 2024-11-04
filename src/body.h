@@ -58,7 +58,7 @@ class Body{
     rlPopMatrix();
     }
     virtual Vector2 getBounds(){
-        return {sizex/2, sizey/2};
+        return {float(sizex/2), float(sizey/2)};
     }
     virtual void Collide(Vector2 normal){
 

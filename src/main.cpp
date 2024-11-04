@@ -2,12 +2,14 @@
 #include <raymath.h>
 #include "ball.h"
 #include "body.h"
+#include <string>
 #include "level_manager.h"
 #include "collision_manager.h" 
 #include "menu.cpp"
 #include <iostream>
 int main()
 {
+    std::string s;
     Color darkGreen = Color{20, 160, 133, 255};
 
     const int screenWidth = 1366;
@@ -31,6 +33,9 @@ int main()
     MainMenu *m = new MainMenu();
     while (!WindowShouldClose())
     {
+        s = "Click Count: ";
+        s.append(std::to_string(clickCount));
+        std::cout<<s;
         if (i<60)
         deltaTime = GetFrameTime();
         
@@ -50,7 +55,7 @@ int main()
             
         }else{
         ball.Draw();
-
+        DrawText(s.c_str(), 0,0,50,BLACK);
         }
         lm.endLevel();
         lm.loadLevel();
@@ -61,7 +66,7 @@ int main()
             ball.setSpeed({0,0});
             DrawLine(GetMousePosition().x, GetMousePosition().y, GetMousePosition().x + del.x*350, GetMousePosition().y+del.y*350, MAGENTA);
         }
-        if(IsMouseButtonDown(0) && !isClicked){
+        if(IsMouseButtonDown(0) && !isClicked && lm.levelIndex>=0){
             clickCount++;
             std::cout<<clickCount;
             isClicked = true;
