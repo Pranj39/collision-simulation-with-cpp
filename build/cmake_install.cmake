@@ -1,4 +1,4 @@
-# Install script for directory: C:/Users/pranj/OneDrive/Desktop/Raylib-CPP-Starter-Template-for-VSCODE-V2-main
+# Install script for directory: C:/Users/pranj_9f9kf7e/gitt/collision-simulation-with-cpp
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -45,5 +45,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "C:/Users/pranj/OneDrive/Desktop/Raylib-CPP-Starter-Template-for-VSCODE-V2-main/build/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "C:/Users/pranj_9f9kf7e/gitt/collision-simulation-with-cpp/build/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

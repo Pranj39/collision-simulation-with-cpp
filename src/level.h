@@ -3,6 +3,7 @@
 #include <raymath.h>
 #include <vector>
 #include <body.h>
+#include <iostream>
 #include "collision_manager.h"
 
 class Level{
@@ -23,9 +24,11 @@ class Level{
     }
     ~Level(){}
 
-    Level(std::vector<Body*> bodies){
+    Level(std::vector<Body> bodies,Body* bd){
+        this->bodies.reserve(100);
         for(int i =0;i<bodies.size();i++){
-            this->bodies.emplace_back(bodies[i]);
+            this->bodies.push_back(bd+i);
+            std::cout<<this->bodies[i]->getBounds().x;
         }
     }
 
@@ -35,6 +38,10 @@ class Level{
         }
     }
     std::vector<Body*> getBodies(){
+        std::cout<<bodies[0]->getBounds().x;
+        for(int i = 0;i<bodies.size();i++){
+           std::cout<<bodies[i]->getBounds().x;
+        }
         return bodies;
     }
 };

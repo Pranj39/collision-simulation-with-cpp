@@ -26,26 +26,47 @@ class Body{
         this->speed.x = speed.x;
         this->speed.y = speed.y;
     };
-
-    Body(Body& b){
-        this->x = b.x;
-        this->y = b.y;
-        this->angle = b.angle;
-        this->speed = speed;
-        this->angle = angle;
-        this->sizex = sizex;
-        this->sizey = sizey;
+    void initUsingArray(std::vector<float> f){
+        if(f.size()==8){
+            x = f[0];
+            y = f[1];
+            sizex = f[2];
+            sizey = f[3];
+            angle = f[4];
+            speed.x = f[5];
+            speed.y = f[6];
+            win = bool(f[7]);
+        }
     }
-    Body(Body&& b){
+    Body(const Body& b){
+        x = b.x;
+        y = b.y;
+        speed = b.speed;
+        angle = b.angle;
+        sizex = b.sizex;
+        sizey = b.sizey;
+        win = b.win;
+    }
+    Body(const Body&& b){
         this->x = b.x;
         this->y = b.y;
+        this->speed = b.speed;
         this->angle = b.angle;
-        this->speed = speed;
-        this->angle = angle;
-        this->sizex = sizex;
-        this->sizey = sizey;
+        this->sizex = b.sizex;
+        this->sizey = b.sizey;
+        this->win = b.win;
     }
     ~Body(){
+
+    }
+    Body& operator=(Body b){
+        this->x = b.x;
+        this->y = b.y;
+        this->speed = b.speed;
+        this->angle = b.angle;
+        this->sizex = b.sizex;
+        this->sizey = b.sizey;
+        this->win = b.win;
 
     }
     virtual void Update(){
